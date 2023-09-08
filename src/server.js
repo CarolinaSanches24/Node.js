@@ -1,9 +1,20 @@
 import  http  from 'node:http' 
 
 const users = [];
-const server = http.createServer((req, res) =>{ //ArrowFuction
+const server = http.createServer(async(req, res) =>{ //ArrowFuction
     const {method, url } = req //Desestruturação
     
+    const buffers =[]
+  
+    for await(const chunk of req){
+        buffers.push(chunk)
+    
+     }
+     try{
+        req.body = JSON.parse(Buffer.concat(buffers).toString())
+     }catch{
+        req.body = null
+     }
 
     if(method==='GET' && url==='/users'){
         return res
@@ -13,7 +24,8 @@ const server = http.createServer((req, res) =>{ //ArrowFuction
 
     if(method==='POST' && url==='/users'){
 
-        users.push({id:1, name: 'John Doe', email: 'johndoe@example.com'})
+        const { name, email} = req.body
+        users.push({id:1, name, email})
 
         //*Status Code
         return res.writeHead(201).end();
