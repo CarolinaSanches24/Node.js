@@ -31,4 +31,14 @@ export class Database{
         this.#persist();
         return data;
     }
+
+    delete(table, id){
+        const rowIndex = this.#database[table].findIndex(row => row.id ===id)
+        //* verifica se o id especificado existe no banco de dados 
+        //! se ele não encontrar retorna -1 
+        if(rowIndex> -1){
+            this.#database[table].splice(rowIndex, 1)
+            this.#persist()
+        }
+    }
 }

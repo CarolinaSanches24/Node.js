@@ -14,7 +14,10 @@ const server = http.createServer(async(req, res) =>{ //ArrowFuction
 
     if(route){
         const routeParams = req.url.match(route.path)
-        console.log(routeParams)
+        
+        req.params = {...routeParams.groups}
+
+      
         return route.handler(req, res)
     }
     console.log(route)
