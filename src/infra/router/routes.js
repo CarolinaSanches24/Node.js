@@ -1,8 +1,14 @@
-import { Database } from './database.js';
 import {randomUUID} from 'node:crypto'
-import { buildRoutePath } from './utils/build-route-path.js';
+import { Database } from '../../database.js';
+import { buildRoutePath } from '../../utils/build-route-path.js';
 
 const database = new Database()
+
+// Frontend Send Information
+// Query Params: http://localhost:3333/users?userId=1&name => filters, pagination/search
+// Route Params: http://localhost:3333/users/1 => resources
+// Request Body: Send information forms => Security protocol https
+
 export const routes = [
     {
         method : 'GET',
@@ -32,7 +38,6 @@ export const routes = [
 
         database.delete('users', id)
 
-       
         return res.writeHead(204).end()
       }
     },

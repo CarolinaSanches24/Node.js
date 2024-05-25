@@ -1,10 +1,10 @@
 import fs from 'node:fs/promises'
 
 const databasePath = new URL('db.json',import.meta.url)
-console.log(databasePath);
+
 export class Database{
     #database = {}
-
+    //Create File
     constructor(){
         fs.readFile(databasePath, 'utf8').then(data=>{
             this.#database = JSON.parse(data)
@@ -34,8 +34,7 @@ export class Database{
 
     delete(table, id){
         const rowIndex = this.#database[table].findIndex(row => row.id ===id)
-        //* verifica se o id especificado existe no banco de dados 
-        //! se ele não encontrar retorna -1 
+       
         if(rowIndex> -1){
             this.#database[table].splice(rowIndex, 1)
             this.#persist()

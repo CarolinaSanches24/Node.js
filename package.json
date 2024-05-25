@@ -1,11 +1,11 @@
 {
   "name": "projetorocket",
-  "type":"module",
+  "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto Utilizando Node.js",
   "main": "index.js",
   "scripts": {
-    "dev": "node --watch src/server.js"
+    "dev": "node --watch src/infra/http/server.js"
   },
   "keywords": [],
   "author": "",
